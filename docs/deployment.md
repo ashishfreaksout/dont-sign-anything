@@ -77,6 +77,8 @@ VITE_API_URL/api/analyze
 VITE_API_URL/api/documents/extract
 ```
 
+The Pages workflow intentionally runs on every push to `main`, not only frontend file changes. This lets a simple empty commit or documentation update rebuild the frontend after repository variables such as `VITE_API_URL` change.
+
 ## Local Build Check
 
 Before pushing deployment changes:
