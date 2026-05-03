@@ -108,6 +108,7 @@ dont-sign-anything/
 - [Case study](docs/case_study.md)
 - [Architecture overview](docs/architecture.md)
 - [Testing and launch checklist](docs/testing_launch_checklist.md)
+- [Deployment](docs/deployment.md)
 - [Roadmap](docs/roadmap.md)
 - [Risk categories](docs/risk_categories.md)
 - [Disclaimers](docs/disclaimers.md)
@@ -115,6 +116,16 @@ dont-sign-anything/
 - [Terms of use](docs/terms_of_use.md)
 
 ## Run Locally
+
+## Public Web Preview
+
+The frontend is configured for GitHub Pages at:
+
+```text
+https://ashishfreaksout.github.io/dont-sign-anything/
+```
+
+GitHub Pages hosts the static frontend only. The FastAPI backend must be deployed separately before public users can run document upload, OCR, accounts, saved history, and live analysis from the public site.
 
 ### Backend
 
