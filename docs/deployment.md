@@ -20,7 +20,7 @@ It builds the app from `frontend/`, uses the repository path `/dont-sign-anythin
 
 ## Enable Pages
 
-If GitHub Pages is not already enabled for the repository:
+The workflow asks GitHub to enable Pages automatically. If GitHub does not allow that for this repository, enable it manually:
 
 1. Open the GitHub repository.
 2. Go to `Settings`.
