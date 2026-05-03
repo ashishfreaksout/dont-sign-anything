@@ -1,0 +1,13 @@
+services:
+  - type: web
+    runtime: docker
+    name: dont-sign-anything-api
+    rootDir: backend
+    plan: free
+    branch: main
+    healthCheckPath: /api/health
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://ashishfreaksout.github.io
+      - key: DSA_DATA_DIR
+        value: /app/app_data

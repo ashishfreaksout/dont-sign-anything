@@ -36,6 +36,34 @@ GitHub Pages only hosts static files. It does not run the FastAPI backend.
 
 That means the public GitHub Pages site can load the frontend, but document upload, OCR, accounts, saved history, and live analysis need the backend deployed separately.
 
+## FastAPI Backend On Render
+
+The backend can be deployed as a separate Render web service. Render's FastAPI guide uses a Python build command and a Uvicorn start command, and Render web services must bind to `0.0.0.0` on the assigned `$PORT`. This repo uses a Docker deployment instead so the image can include the Tesseract OCR engine.
+
+This repo includes:
+
+```text
+render.yaml
+backend/Dockerfile
+backend/.dockerignore
+```
+
+Render Blueprint settings:
+
+- Service name: `dont-sign-anything-api`
+- Runtime: Docker
+- Root directory: `backend`
+- Health check path: `/api/health`
+- Allowed frontend origin: `https://ashishfreaksout.github.io`
+
+Deploy steps:
+
+1. Open Render.
+2. Create a new Blueprint or Web Service from the GitHub repo.
+3. Use the root `render.yaml` if deploying as a Blueprint.
+4. Wait for the service to build and deploy.
+5. Open the service URL and confirm `/api/health` returns `{"status":"ok"}`.
+
 When the backend has a public HTTPS URL, add a repository variable named `VITE_API_URL` with the backend base URL, for example:
 
 ```text
@@ -70,3 +98,7 @@ Reasonable backend hosts for the FastAPI service include:
 - A small VPS
 
 Use HTTPS for the backend URL because GitHub Pages is served over HTTPS.
+
+## Storage Note
+
+The current backend stores optional saved reports in SQLite. On a simple hosted web service without a persistent disk, that data can reset when the service restarts or redeploys. For production, move saved history to PostgreSQL or another persistent database.

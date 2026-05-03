@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib
 import hmac
 import json
+import os
 from pathlib import Path
 import secrets
 import sqlite3
@@ -18,7 +19,7 @@ from app.models.schemas import (
     UserProfile,
 )
 
-DATABASE_DIR = Path(__file__).resolve().parents[2] / "app_data"
+DATABASE_DIR = Path(os.getenv("DSA_DATA_DIR", Path(__file__).resolve().parents[2] / "app_data"))
 DATABASE_PATH = DATABASE_DIR / "dont_sign_anything.sqlite3"
 PASSWORD_ITERATIONS = 180_000
 

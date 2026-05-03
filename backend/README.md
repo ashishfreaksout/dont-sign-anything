@@ -42,3 +42,17 @@ brew install tesseract
 ```
 
 Supported image inputs are JPG, PNG, TIFF, BMP, and WebP. Uploaded files are processed in memory.
+
+## Deployment
+
+The backend can be deployed separately from the GitHub Pages frontend. The repo includes a Dockerfile that installs Tesseract for OCR and a root-level `render.yaml` for Render.
+
+Render settings:
+
+- Root directory: `backend`
+- Runtime: Docker
+- Health check path: `/api/health`
+- Environment variable: `ALLOWED_ORIGINS=https://ashishfreaksout.github.io`
+- Optional data path: `DSA_DATA_DIR=/app/app_data`
+
+After the API is live, set the frontend GitHub repository variable `VITE_API_URL` to the backend HTTPS URL, then rerun the Pages workflow.
