@@ -102,6 +102,18 @@ dont-sign-anything/
     disclaimers.md
 ```
 
+## Documentation
+
+- [Product brief](docs/product_brief.md)
+- [Case study](docs/case_study.md)
+- [Architecture overview](docs/architecture.md)
+- [Testing and launch checklist](docs/testing_launch_checklist.md)
+- [Roadmap](docs/roadmap.md)
+- [Risk categories](docs/risk_categories.md)
+- [Disclaimers](docs/disclaimers.md)
+- [Privacy policy](docs/privacy_policy.md)
+- [Terms of use](docs/terms_of_use.md)
+
 ## Run Locally
 
 ### Backend
