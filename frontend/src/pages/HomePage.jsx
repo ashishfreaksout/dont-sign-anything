@@ -2,6 +2,7 @@ import {
   AlertCircle,
   ArrowRight,
   ClipboardCheck,
+  Coffee,
   FileSearch,
   Gauge,
   LockKeyhole,
@@ -64,6 +65,7 @@ export default function HomePage({
   onAnalyze,
   user,
   onOpenAccount,
+  onOpenSupport,
 }) {
   const canAnalyze = inputText.trim().length >= 20 && !isExtracting && !isAnalyzing;
   useScrollReveal([Boolean(error)]);
@@ -83,6 +85,14 @@ export default function HomePage({
             <span className="status-pill hidden px-4 py-2 text-sm font-bold sm:inline-flex">
               Educational assistant
             </span>
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              className="secondary-action hidden h-11 items-center justify-center gap-2 px-4 text-base font-bold text-slate-800 transition sm:inline-flex"
+            >
+              <Coffee className="h-5 w-5 text-teal-700" aria-hidden="true" />
+              Support
+            </button>
             <button
               type="button"
               onClick={onOpenAccount}
@@ -220,7 +230,7 @@ export default function HomePage({
           </button>
         </section>
       </main>
-      <SiteFooter />
+      <SiteFooter onOpenSupport={onOpenSupport} />
     </div>
   );
 }

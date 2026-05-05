@@ -1,4 +1,4 @@
-import { ExternalLink, Github, ShieldCheck } from "lucide-react";
+import { Coffee, ExternalLink, Github, ShieldCheck } from "lucide-react";
 
 const githubBaseUrl = "https://github.com/ashishfreaksout/dont-sign-anything";
 
@@ -22,6 +22,7 @@ const footerColumns = [
   {
     title: "Project",
     links: [
+      { label: "Support the project", action: "support", icon: Coffee },
       { label: "Source resources", href: `${githubBaseUrl}/tree/main`, icon: Github },
       { label: "Mobile preview notes", href: `${githubBaseUrl}/blob/main/mobile/README.md` },
       { label: "Main README", href: `${githubBaseUrl}/blob/main/README.md` },
@@ -29,7 +30,7 @@ const footerColumns = [
   },
 ];
 
-export default function SiteFooter() {
+export default function SiteFooter({ onOpenSupport = () => {} }) {
   return (
     <footer className="border-t border-slate-200 bg-white/82">
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1.2fr_1.8fr]">
@@ -61,16 +62,27 @@ export default function SiteFooter() {
                   const Icon = link.icon || ExternalLink;
                   return (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-base font-bold text-slate-700 transition hover:text-teal-700"
-                      >
-                        {link.icon && <Icon className="h-5 w-5" aria-hidden="true" />}
-                        <span>{link.label}</span>
-                        {!link.icon && <Icon className="h-4 w-4" aria-hidden="true" />}
-                      </a>
+                      {link.action === "support" ? (
+                        <button
+                          type="button"
+                          onClick={onOpenSupport}
+                          className="inline-flex items-center gap-2 text-left text-base font-bold text-slate-700 transition hover:text-teal-700"
+                        >
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                          <span>{link.label}</span>
+                        </button>
+                      ) : (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 text-base font-bold text-slate-700 transition hover:text-teal-700"
+                        >
+                          {link.icon && <Icon className="h-5 w-5" aria-hidden="true" />}
+                          <span>{link.label}</span>
+                          {!link.icon && <Icon className="h-4 w-4" aria-hidden="true" />}
+                        </a>
+                      )}
                     </li>
                   );
                 })}

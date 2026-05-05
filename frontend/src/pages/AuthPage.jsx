@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Apple, ArrowLeft, Chrome, Facebook, Mail, ShieldCheck } from "lucide-react";
+import { Apple, ArrowLeft, Chrome, Coffee, Facebook, Mail, ShieldCheck } from "lucide-react";
 
 import AccountPanel from "../components/AccountPanel.jsx";
 import BrandLogo from "../components/BrandLogo.jsx";
@@ -31,6 +31,7 @@ export default function AuthPage({
   onRenameSaved,
   onDeleteSaved,
   onUpdatePreferences,
+  onOpenSupport,
 }) {
   const [providerMessage, setProviderMessage] = useState("");
 
@@ -53,14 +54,24 @@ export default function AuthPage({
               <p className="text-sm text-slate-500">{user ? "Account" : "Sign in"}</p>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={onBack}
-            className="secondary-action inline-flex h-11 items-center justify-center gap-2 px-4 text-base font-bold text-slate-800 transition"
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            {hasAnalysis ? "Back to report" : "Back to review"}
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              className="secondary-action inline-flex h-11 items-center justify-center gap-2 px-4 text-base font-bold text-slate-800 transition"
+            >
+              <Coffee className="h-4 w-4 text-teal-700" aria-hidden="true" />
+              Support
+            </button>
+            <button
+              type="button"
+              onClick={onBack}
+              className="secondary-action inline-flex h-11 items-center justify-center gap-2 px-4 text-base font-bold text-slate-800 transition"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              {hasAnalysis ? "Back to report" : "Back to review"}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -156,7 +167,7 @@ export default function AuthPage({
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <SiteFooter onOpenSupport={onOpenSupport} />
     </div>
   );
 }

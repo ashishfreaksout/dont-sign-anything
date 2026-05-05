@@ -1,4 +1,4 @@
-import { ArrowLeft, FileText, RotateCcw, UserRound } from "lucide-react";
+import { ArrowLeft, Coffee, FileText, RotateCcw, UserRound } from "lucide-react";
 
 import AgreementDashboard from "../components/AgreementDashboard.jsx";
 import BrandLogo from "../components/BrandLogo.jsx";
@@ -21,6 +21,7 @@ export default function ResultsPage({
   onStartOver,
   onSaveAnalysis,
   onOpenAccount,
+  onOpenSupport,
 }) {
   useScrollReveal([analysis]);
 
@@ -36,6 +37,14 @@ export default function ResultsPage({
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              className="secondary-action inline-flex h-11 items-center gap-2 px-4 text-base font-bold text-slate-800 transition"
+            >
+              <Coffee className="h-4 w-4 text-teal-700" aria-hidden="true" />
+              Support
+            </button>
             <button
               type="button"
               onClick={onOpenAccount}
@@ -173,7 +182,7 @@ export default function ResultsPage({
           </ul>
         </section>
       </main>
-      <SiteFooter />
+      <SiteFooter onOpenSupport={onOpenSupport} />
     </div>
   );
 }

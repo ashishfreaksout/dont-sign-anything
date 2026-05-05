@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import AuthPage from "./pages/AuthPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ResultsPage from "./pages/ResultsPage.jsx";
+import SupportPage from "./pages/SupportPage.jsx";
 import {
   analyzeAgreement,
   clearStoredToken,
@@ -29,7 +30,7 @@ export default function App() {
   const [token, setToken] = useState(getStoredToken());
   const [user, setUser] = useState(null);
   const [historyItems, setHistoryItems] = useState([]);
-  const [view, setView] = useState("home");
+  const [view, setView] = useState(() => (window.location.hash === "#support" ? "support" : "home"));
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [isExtracting, setIsExtracting] = useState(false);
@@ -68,6 +69,21 @@ export default function App() {
       ignore = true;
     };
   }, [token]);
+
+  useEffect(() => {
+    function handleHashChange() {
+      if (window.location.hash === "#support") {
+        setView("support");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   async function handleDocumentSelected(fileOrFiles) {
     const files = Array.isArray(fileOrFiles) ? fileOrFiles : [fileOrFiles];
@@ -257,6 +273,32 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function handleOpenSupport() {
+    setView("support");
+    if (window.location.hash !== "#support") {
+      window.location.hash = "support";
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleCloseSupport() {
+    setView("home");
+    if (window.location.hash === "#support") {
+      window.history.pushState("", document.title, `${window.location.pathname}${window.location.search}`);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (view === "support") {
+    return (
+      <SupportPage
+        hasAnalysis={Boolean(analysis)}
+        onBack={handleCloseSupport}
+        onOpenSupport={handleOpenSupport}
+      />
+    );
+  }
+
   if (view === "auth") {
     return (
       <AuthPage
@@ -272,6 +314,7 @@ export default function App() {
         onRenameSaved={handleRenameSaved}
         onDeleteSaved={handleDeleteSaved}
         onUpdatePreferences={handleUpdatePreferences}
+        onOpenSupport={handleOpenSupport}
       />
     );
   }
@@ -287,6 +330,7 @@ export default function App() {
         onStartOver={handleStartOver}
         onSaveAnalysis={handleSaveCurrentAnalysis}
         onOpenAccount={handleOpenAccount}
+        onOpenSupport={handleOpenSupport}
       />
     );
   }
@@ -304,6 +348,7 @@ export default function App() {
       onAnalyze={handleAnalyze}
       user={user}
       onOpenAccount={handleOpenAccount}
+      onOpenSupport={handleOpenSupport}
     />
   );
 }

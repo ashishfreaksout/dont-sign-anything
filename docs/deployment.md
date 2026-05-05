@@ -79,6 +79,16 @@ VITE_API_URL/api/documents/extract
 
 The Pages workflow intentionally runs on every push to `main`, not only frontend file changes. This lets a simple empty commit or documentation update rebuild the frontend after repository variables such as `VITE_API_URL` change.
 
+## Optional Donation Link
+
+The support page can show a real donation link when a repository variable is configured:
+
+```text
+VITE_DONATION_URL=https://your-donation-link.example
+```
+
+If this variable is missing, the support page stays visible but shows the donation link as coming soon. Donations are voluntary and do not unlock paid features.
+
 ## Local Build Check
 
 Before pushing deployment changes:
