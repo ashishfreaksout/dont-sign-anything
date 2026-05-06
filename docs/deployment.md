@@ -79,15 +79,16 @@ VITE_API_URL/api/documents/extract
 
 The Pages workflow intentionally runs on every push to `main`, not only frontend file changes. This lets a simple empty commit or documentation update rebuild the frontend after repository variables such as `VITE_API_URL` change.
 
-## Optional Donation Link
+## Crypto Tip Wallets
 
-The support page can show a real donation link when a repository variable is configured:
+The support page can show crypto wallet addresses when repository variables are configured:
 
 ```text
-VITE_DONATION_URL=https://your-donation-link.example
+VITE_BTC_ADDRESS=your-bitcoin-address
+VITE_ETH_ADDRESS=your-ethereum-address
 ```
 
-If this variable is missing, the support page stays visible but shows the donation link as coming soon. Donations are voluntary and do not unlock paid features.
+If these variables are missing, the support page stays visible but tells maintainers which variable to add. Crypto tips are voluntary and do not unlock paid features. After changing these variables, re-run the GitHub Pages workflow so Vite can bake the values into the static frontend.
 
 ## Local Build Check
 

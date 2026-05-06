@@ -1,20 +1,42 @@
+import { useState } from "react";
 import {
   ArrowLeft,
-  Coffee,
+  Check,
+  Copy,
   ExternalLink,
   Github,
   HeartHandshake,
   Server,
   ShieldCheck,
   Sparkles,
+  Wallet,
 } from "lucide-react";
 
 import BrandLogo from "../components/BrandLogo.jsx";
 import SiteFooter from "../components/SiteFooter.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 
-const donationUrl = import.meta.env.VITE_DONATION_URL || "";
 const githubRepoUrl = "https://github.com/ashishfreaksout/dont-sign-anything";
+const cryptoWallets = [
+  {
+    id: "btc",
+    name: "Bitcoin",
+    asset: "BTC",
+    network: "Bitcoin network",
+    address: import.meta.env.VITE_BTC_ADDRESS || "",
+    uriPrefix: "bitcoin",
+    warning: "Send BTC only on the Bitcoin network.",
+  },
+  {
+    id: "eth",
+    name: "Ethereum",
+    asset: "ETH",
+    network: "Ethereum mainnet",
+    address: import.meta.env.VITE_ETH_ADDRESS || "",
+    uriPrefix: "ethereum",
+    warning: "Send ETH only on Ethereum mainnet unless you confirm another network first.",
+  },
+];
 
 const supportItems = [
   {
@@ -35,7 +57,23 @@ const supportItems = [
 ];
 
 export default function SupportPage({ hasAnalysis, onBack, onOpenSupport }) {
+  const [copiedWallet, setCopiedWallet] = useState("");
   useScrollReveal([]);
+
+  async function handleCopy(wallet) {
+    if (!wallet.address) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(wallet.address);
+      setCopiedWallet(wallet.id);
+      window.setTimeout(() => setCopiedWallet(""), 1800);
+    } catch {
+      setCopiedWallet(`${wallet.id}-failed`);
+      window.setTimeout(() => setCopiedWallet(""), 2400);
+    }
+  }
 
   return (
     <div className="page-shell min-h-screen">
@@ -71,44 +109,27 @@ export default function SupportPage({ hasAnalysis, onBack, onOpenSupport }) {
             </h1>
             <p className="mt-5 max-w-3xl text-xl leading-9 text-slate-600">
               Donations are optional. They do not unlock special results, faster scoring, or
-              hidden features. The goal is simply to help keep this educational tool available
-              while it grows.
+              hidden features. Crypto tips are just a simple way to support the project while it
+              grows.
             </p>
           </div>
 
           <aside className="scroll-reveal surface-card p-6 md:p-7" data-scroll-reveal>
             <div className="metric-icon flex h-14 w-14 items-center justify-center text-teal-700">
-              <Coffee className="h-7 w-7" aria-hidden="true" />
+              <Wallet className="h-7 w-7" aria-hidden="true" />
             </div>
             <p className="mt-6 text-base font-bold uppercase text-teal-700">
-              Buy me a coffee
+              Crypto tips
             </p>
             <h2 className="mt-2 text-3xl font-bold leading-tight text-slate-950">
-              A small thank-you helps cover ongoing project costs.
+              Send a small tip directly to the project wallet.
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
-              Hosting, testing files, OCR experiments, and polish all take time. A contribution is
-              appreciated, but never required.
+              Use the listed network exactly. Crypto transfers are usually not reversible, so check
+              the address and network before sending.
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              {donationUrl ? (
-                <a
-                  href={donationUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="primary-action inline-flex h-12 items-center justify-center gap-2 px-5 text-base font-bold text-white transition"
-                >
-                  <Coffee className="h-5 w-5" aria-hidden="true" />
-                  Buy me a coffee
-                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                </a>
-              ) : (
-                <span className="inline-flex h-12 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 px-5 text-base font-bold text-slate-500">
-                  Donation link coming soon
-                </span>
-              )}
-
               <a
                 href={githubRepoUrl}
                 target="_blank"
@@ -120,6 +141,71 @@ export default function SupportPage({ hasAnalysis, onBack, onOpenSupport }) {
               </a>
             </div>
           </aside>
+        </section>
+
+        <section className="mt-8 grid gap-5 lg:grid-cols-2">
+          {cryptoWallets.map((wallet) => {
+            const copied = copiedWallet === wallet.id;
+            const copyFailed = copiedWallet === `${wallet.id}-failed`;
+            return (
+              <article key={wallet.id} className="scroll-reveal surface-card p-6 md:p-7" data-scroll-reveal>
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <p className="text-base font-bold uppercase text-teal-700">{wallet.asset}</p>
+                    <h2 className="mt-1 text-2xl font-bold text-slate-950">{wallet.name}</h2>
+                    <p className="mt-1 text-base font-semibold text-slate-500">{wallet.network}</p>
+                  </div>
+                  <div className="icon-tile flex h-12 w-12 items-center justify-center text-teal-700">
+                    <Wallet className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                </div>
+
+                {wallet.address ? (
+                  <>
+                    <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                      <p className="text-sm font-bold uppercase text-slate-500">Receiver address</p>
+                      <code className="mt-2 block break-all text-base font-bold leading-7 text-slate-950">
+                        {wallet.address}
+                      </code>
+                    </div>
+                    <p className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-base font-semibold leading-7 text-amber-900">
+                      {wallet.warning}
+                    </p>
+                    <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                      <button
+                        type="button"
+                        onClick={() => handleCopy(wallet)}
+                        className="primary-action inline-flex h-12 items-center justify-center gap-2 px-5 text-base font-bold text-white transition"
+                      >
+                        {copied ? <Check className="h-5 w-5" aria-hidden="true" /> : <Copy className="h-5 w-5" aria-hidden="true" />}
+                        {copied ? "Copied" : "Copy address"}
+                      </button>
+                      <a
+                        href={`${wallet.uriPrefix}:${wallet.address}`}
+                        className="secondary-action inline-flex h-12 items-center justify-center gap-2 px-5 text-base font-bold text-slate-800 transition"
+                      >
+                        Open wallet
+                        <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                      </a>
+                    </div>
+                    {copyFailed && (
+                      <p className="mt-3 text-base font-semibold text-red-700">
+                        Copy failed. Select and copy the address manually.
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4 text-base leading-7 text-slate-600">
+                    Add a GitHub Pages variable named{" "}
+                    <code className="font-bold text-slate-950">
+                      {wallet.id === "btc" ? "VITE_BTC_ADDRESS" : "VITE_ETH_ADDRESS"}
+                    </code>{" "}
+                    to show this wallet.
+                  </div>
+                )}
+              </article>
+            );
+          })}
         </section>
 
         <section className="mt-8 grid gap-5 md:grid-cols-3">
