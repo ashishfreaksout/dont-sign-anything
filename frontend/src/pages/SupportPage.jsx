@@ -19,6 +19,7 @@ import useScrollReveal from "../hooks/useScrollReveal.js";
 const githubRepoUrl = "https://github.com/ashishfreaksout/dont-sign-anything";
 const defaultBtcAddress = "bc1qy6u2auqdjvw5sk2quk86v69c0cp367q3h5ray0";
 const defaultEthAddress = "0x19b9abfBbE0686365445e20984D43A08C566B9bc";
+const defaultSolAddress = "DaSzXuM96e87JntboiL1cLCHFU52G4xWYJ2PptXN7x7R";
 
 const cryptoWallets = [
   {
@@ -38,6 +39,15 @@ const cryptoWallets = [
     address: import.meta.env.VITE_ETH_ADDRESS || defaultEthAddress,
     uriPrefix: "ethereum",
     warning: "Send ETH only on Ethereum mainnet unless you confirm another network first.",
+  },
+  {
+    id: "sol",
+    name: "Solana",
+    asset: "SOL",
+    network: "Solana network",
+    address: import.meta.env.VITE_SOL_ADDRESS || defaultSolAddress,
+    uriPrefix: "solana",
+    warning: "Send SOL only on the Solana network.",
   },
 ];
 
@@ -201,7 +211,11 @@ export default function SupportPage({ hasAnalysis, onBack, onOpenSupport }) {
                   <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4 text-base leading-7 text-slate-600">
                     Add a GitHub Pages variable named{" "}
                     <code className="font-bold text-slate-950">
-                      {wallet.id === "btc" ? "VITE_BTC_ADDRESS" : "VITE_ETH_ADDRESS"}
+                      {wallet.id === "btc"
+                        ? "VITE_BTC_ADDRESS"
+                        : wallet.id === "eth"
+                          ? "VITE_ETH_ADDRESS"
+                          : "VITE_SOL_ADDRESS"}
                     </code>{" "}
                     to show this wallet.
                   </div>

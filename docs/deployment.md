@@ -86,6 +86,7 @@ The support page can show crypto wallet addresses when repository variables are 
 ```text
 VITE_BTC_ADDRESS=your-bitcoin-address
 VITE_ETH_ADDRESS=your-ethereum-address
+VITE_SOL_ADDRESS=your-solana-address
 ```
 
 If these variables are missing, the support page stays visible but tells maintainers which variable to add. Crypto tips are voluntary and do not unlock paid features. After changing these variables, re-run the GitHub Pages workflow so Vite can bake the values into the static frontend.
