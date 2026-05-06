@@ -21,11 +21,55 @@ const defaultBtcAddress = "bc1qy6u2auqdjvw5sk2quk86v69c0cp367q3h5ray0";
 const defaultEthAddress = "0x19b9abfBbE0686365445e20984D43A08C566B9bc";
 const defaultSolAddress = "DaSzXuM96e87JntboiL1cLCHFU52G4xWYJ2PptXN7x7R";
 
+function BitcoinLogo() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-8 w-8" aria-hidden="true">
+      <circle cx="24" cy="24" r="22" fill="#f7931a" />
+      <path
+        d="M17 14h9.2c4.4 0 7 2 7 5.2 0 2.2-1.1 3.8-3.1 4.6 2.6.7 4 2.5 4 5.3 0 3.5-2.8 5.9-7.5 5.9H17V14Zm6.2 8h2.3c1.8 0 2.8-.7 2.8-2s-1-2-2.8-2h-2.3v4Zm0 9h2.9c1.9 0 3-.8 3-2.4s-1.1-2.4-3-2.4h-2.9V31Z"
+        fill="#fff"
+      />
+      <path d="M20.6 10v5.5M25.6 10v5.5M20.6 32.5V38M25.6 32.5V38" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function EthereumLogo() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-8 w-8" aria-hidden="true">
+      <circle cx="24" cy="24" r="22" fill="#eef2ff" />
+      <path d="M24 7 12.5 25.5 24 20.2l11.5 5.3L24 7Z" fill="#627eea" />
+      <path d="M24 20.2 12.5 25.5 24 32.3l11.5-6.8L24 20.2Z" fill="#8a9af5" />
+      <path d="M12.5 28.3 24 41l11.5-12.7L24 35.1l-11.5-6.8Z" fill="#627eea" />
+      <path d="M24 7v13.2l11.5 5.3L24 7ZM24 32.3V41l11.5-12.7L24 35.1v-2.8Z" fill="#3544a0" opacity="0.65" />
+    </svg>
+  );
+}
+
+function SolanaLogo() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-8 w-8" aria-hidden="true">
+      <circle cx="24" cy="24" r="22" fill="#111827" />
+      <defs>
+        <linearGradient id="solanaLogoGradient" x1="11" y1="11" x2="37" y2="37" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#14f195" />
+          <stop offset="0.5" stopColor="#80ecff" />
+          <stop offset="1" stopColor="#dc1fff" />
+        </linearGradient>
+      </defs>
+      <path d="M15.2 14h21.2l-3.6 4H11.6l3.6-4Z" fill="url(#solanaLogoGradient)" />
+      <path d="M11.6 22h21.2l3.6 4H15.2l-3.6-4Z" fill="url(#solanaLogoGradient)" />
+      <path d="M15.2 30h21.2l-3.6 4H11.6l3.6-4Z" fill="url(#solanaLogoGradient)" />
+    </svg>
+  );
+}
+
 const cryptoWallets = [
   {
     id: "btc",
     name: "Bitcoin",
     asset: "BTC",
+    Logo: BitcoinLogo,
     network: "Bitcoin network",
     address: import.meta.env.VITE_BTC_ADDRESS || defaultBtcAddress,
     uriPrefix: "bitcoin",
@@ -35,6 +79,7 @@ const cryptoWallets = [
     id: "eth",
     name: "Ethereum",
     asset: "ETH",
+    Logo: EthereumLogo,
     network: "Ethereum mainnet",
     address: import.meta.env.VITE_ETH_ADDRESS || defaultEthAddress,
     uriPrefix: "ethereum",
@@ -44,6 +89,7 @@ const cryptoWallets = [
     id: "sol",
     name: "Solana",
     asset: "SOL",
+    Logo: SolanaLogo,
     network: "Solana network",
     address: import.meta.env.VITE_SOL_ADDRESS || defaultSolAddress,
     uriPrefix: "solana",
@@ -160,13 +206,19 @@ export default function SupportPage({ hasAnalysis, onBack, onOpenSupport }) {
           {cryptoWallets.map((wallet) => {
             const copied = copiedWallet === wallet.id;
             const copyFailed = copiedWallet === `${wallet.id}-failed`;
+            const Logo = wallet.Logo;
             return (
               <article key={wallet.id} className="scroll-reveal surface-card p-6 md:p-7" data-scroll-reveal>
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <p className="text-base font-bold uppercase text-teal-700">{wallet.asset}</p>
-                    <h2 className="mt-1 text-2xl font-bold text-slate-950">{wallet.name}</h2>
-                    <p className="mt-1 text-base font-semibold text-slate-500">{wallet.network}</p>
+                  <div className="flex items-start gap-4">
+                    <div className="icon-tile flex h-14 w-14 flex-none items-center justify-center">
+                      <Logo />
+                    </div>
+                    <div>
+                      <p className="text-base font-bold uppercase text-teal-700">{wallet.asset}</p>
+                      <h2 className="mt-1 text-2xl font-bold text-slate-950">{wallet.name}</h2>
+                      <p className="mt-1 text-base font-semibold text-slate-500">{wallet.network}</p>
+                    </div>
                   </div>
                   <div className="icon-tile flex h-12 w-12 items-center justify-center text-teal-700">
                     <Wallet className="h-6 w-6" aria-hidden="true" />
