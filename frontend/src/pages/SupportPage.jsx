@@ -17,13 +17,16 @@ import SiteFooter from "../components/SiteFooter.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 
 const githubRepoUrl = "https://github.com/ashishfreaksout/dont-sign-anything";
+const defaultBtcAddress = "bc1qy6u2auqdjvw5sk2quk86v69c0cp367q3h5ray0";
+const defaultEthAddress = "0x19b9abfBbE0686365445e20984D43A08C566B9bc";
+
 const cryptoWallets = [
   {
     id: "btc",
     name: "Bitcoin",
     asset: "BTC",
     network: "Bitcoin network",
-    address: import.meta.env.VITE_BTC_ADDRESS || "",
+    address: import.meta.env.VITE_BTC_ADDRESS || defaultBtcAddress,
     uriPrefix: "bitcoin",
     warning: "Send BTC only on the Bitcoin network.",
   },
@@ -32,7 +35,7 @@ const cryptoWallets = [
     name: "Ethereum",
     asset: "ETH",
     network: "Ethereum mainnet",
-    address: import.meta.env.VITE_ETH_ADDRESS || "",
+    address: import.meta.env.VITE_ETH_ADDRESS || defaultEthAddress,
     uriPrefix: "ethereum",
     warning: "Send ETH only on Ethereum mainnet unless you confirm another network first.",
   },
