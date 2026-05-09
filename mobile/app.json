@@ -20,6 +20,7 @@
       }
     },
     "android": {
+      "package": "com.ashishfreaksout.dontsignanything",
       "permissions": [
         "CAMERA",
         "READ_MEDIA_IMAGES"

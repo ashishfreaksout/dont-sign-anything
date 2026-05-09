@@ -80,7 +80,8 @@ Expected result:
 
 ## Pre-Launch Tasks
 
-- Replace development Expo links with stable release links when published.
+- Keep the Android Expo/EAS preview link current until a Google Play release exists.
+- Set up iOS TestFlight or registered device testing before advertising iPhone access.
 - Add production auth before using real customer accounts.
 - Move saved history from local SQLite to managed production storage.
 - Add production logging that avoids sensitive document text.

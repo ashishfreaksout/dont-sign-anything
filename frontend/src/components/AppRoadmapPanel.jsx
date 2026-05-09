@@ -1,19 +1,23 @@
 import { Apple, ExternalLink, Play, Smartphone } from "lucide-react";
 
-const expoPreviewUrl = import.meta.env.VITE_EXPO_PREVIEW_URL || "exp://192.168.1.136:8081";
-const expoWebPreviewUrl = import.meta.env.VITE_EXPO_WEB_PREVIEW_URL || "http://localhost:8081";
+const androidPreviewUrl =
+  import.meta.env.VITE_ANDROID_PREVIEW_URL ||
+  "https://expo.dev/accounts/ashishfreaksout/projects/dont-sign-anything/builds/8d98490d-2b8b-442b-b3e3-7461059c5c8b";
+const expoProjectUrl =
+  import.meta.env.VITE_EXPO_PROJECT_URL ||
+  "https://expo.dev/accounts/ashishfreaksout/projects/dont-sign-anything";
 
 const plannedApps = [
   {
     name: "iOS app",
     platform: "Apple App Store",
-    status: "MVP scaffold started",
+    status: "Needs Apple testing setup",
     icon: Apple,
   },
   {
     name: "Android app",
-    platform: "Google Play",
-    status: "MVP scaffold started",
+    platform: "Expo internal preview",
+    status: "Tester APK ready",
     icon: Play,
   },
 ];
@@ -30,27 +34,27 @@ export default function AppRoadmapPanel() {
             <p className="text-base font-bold uppercase text-teal-700">Mobile apps</p>
             <h2 className="mt-1 text-2xl font-bold text-slate-950">Try the mobile preview with Expo</h2>
             <p className="mt-2 max-w-3xl text-base leading-7 text-slate-600">
-              The apps are not published in the App Store or Google Play yet. For local testing,
-              use Expo Go while the development server and backend are running on the same network.
+              The apps are not published in the App Store or Google Play yet. Android testers can install
+              the current preview build from Expo. iPhone testing still needs Apple Developer/TestFlight setup.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a
-                href={expoPreviewUrl}
+                href={androidPreviewUrl}
                 className="primary-action inline-flex h-12 items-center justify-center gap-2 px-5 text-base font-bold text-white transition"
               >
-                Open Expo preview
+                Install Android preview
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
-                href={expoWebPreviewUrl}
+                href={expoProjectUrl}
                 className="secondary-action inline-flex h-12 items-center justify-center gap-2 px-5 text-base font-bold text-slate-800 transition"
               >
-                Open web preview
+                View Expo project
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
             <p className="mt-3 text-sm font-semibold leading-6 text-slate-500">
-              Local preview links can change when your network or Expo server changes.
+              Android users may need to allow installs from their browser before opening the APK.
             </p>
           </div>
         </div>

@@ -95,12 +95,12 @@ Implemented in the first Phase 5 pass:
 - Share or export report
 - Expo React Native scaffold under `mobile/`
 - In-app backend URL configuration for simulator or real phone testing
-- Expo Go developer preview links on the website for local testing without app store publishing
+- Android Expo/EAS internal preview build linked from the website for testing without Google Play
 
 Still planned:
 
 - Native polish for App Store / Google Play release
-- Push through EAS build profiles
+- iOS TestFlight or registered device testing setup
 - Real app icons and store screenshots
 - App Store and Google Play privacy forms
 - Add real App Store and Google Play links to the website after apps are published

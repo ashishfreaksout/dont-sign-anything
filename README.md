@@ -71,6 +71,8 @@ If OCR dependencies or the Tesseract engine are missing, image uploads return a 
 - Mobile report screen with risk score, summary, top risks, and questions
 - Email sign-in using the existing local auth endpoints
 - Save, open, delete, and share reports on mobile
+- Android internal preview build through Expo/EAS:
+  `https://expo.dev/accounts/ashishfreaksout/projects/dont-sign-anything/builds/8d98490d-2b8b-442b-b3e3-7461059c5c8b`
 
 Real App Store and Google Play links should be added only after the apps are published.
 
@@ -158,7 +160,7 @@ npm start
 
 Use the in-app Backend URL field to point at your FastAPI server. A real phone needs your computer LAN IP, for example `http://192.168.1.25:8000`.
 
-For local tester access without publishing to the app stores, keep Expo running and share the Expo Go preview link or QR code. The current local preview is `exp://192.168.1.136:8081`, and the current web preview is `http://localhost:8081`. These links are development links and can change when your network changes.
+For Android tester access without publishing to Google Play, share the Expo/EAS internal preview build link. Android users may need to allow APK installs from their browser. iOS testing still requires Apple Developer/TestFlight setup or registered device distribution.
 
 ## API
 
