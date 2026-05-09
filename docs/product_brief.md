@@ -37,6 +37,12 @@ The MVP helps users answer:
 - Treat documents as sensitive.
 - Build in phases.
 
+## Technical Approach
+
+The current analyzer is an explainable rule-based NLP engine. It does not depend on a trained legal AI model or paid LLM. The backend classifies document type with weighted keyword signals, detects risky clause patterns, extracts source snippets, calculates confidence and risk score, then returns plain-English explanations and questions.
+
+This makes the MVP easier to inspect in a portfolio review because each finding can be traced to the words that triggered it.
+
 ## Primary Features
 
 - Paste text or upload documents

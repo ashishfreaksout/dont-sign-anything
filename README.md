@@ -4,6 +4,12 @@ Don't Sign Anything is a phased product for helping people understand potential 
 
 This project is an educational document risk assistant. It is not a lawyer and does not provide legal advice.
 
+## AI/NLP Approach
+
+The current analysis engine is an explainable rule-based NLP pipeline, not a trained legal AI model or paid LLM. It normalizes agreement text, classifies document type with weighted keyword signals, detects risky clauses with regex patterns, extracts trigger snippets, assigns confidence, calculates a risk score, and generates plain-English questions before signing.
+
+This keeps the MVP transparent: every finding can be traced back to a matched phrase and a documented rule. Optional LLM summaries are deferred and should be added later as a supplement, not as the only analysis path.
+
 ## Phase 1 Scope
 
 - React + Vite frontend
@@ -102,6 +108,8 @@ dont-sign-anything/
     roadmap.md
     risk_categories.md
     disclaimers.md
+  notebooks/
+    rule_based_nlp_walkthrough.ipynb
 ```
 
 ## Documentation
@@ -109,6 +117,8 @@ dont-sign-anything/
 - [Product brief](docs/product_brief.md)
 - [Case study](docs/case_study.md)
 - [Architecture overview](docs/architecture.md)
+- [AI/NLP engine](docs/ai_nlp_engine.md)
+- [Model card](docs/model_card.md)
 - [Testing and launch checklist](docs/testing_launch_checklist.md)
 - [Deployment](docs/deployment.md)
 - [Roadmap](docs/roadmap.md)
@@ -116,6 +126,7 @@ dont-sign-anything/
 - [Disclaimers](docs/disclaimers.md)
 - [Privacy policy](docs/privacy_policy.md)
 - [Terms of use](docs/terms_of_use.md)
+- [Analyzer walkthrough notebook](notebooks/rule_based_nlp_walkthrough.ipynb)
 
 ## Run Locally
 

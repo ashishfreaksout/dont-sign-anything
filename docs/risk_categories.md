@@ -2,6 +2,8 @@
 
 The current analyzer uses explainable rule-based keyword and phrase detection. Phase 2 adds document type classification, risk confidence scores, and document-type-aware scoring. These rules are review signals only and can miss important language.
 
+For the full technical explanation, see [AI/NLP engine](ai_nlp_engine.md) and [model card](model_card.md).
+
 ## Arbitration Clause
 
 Potential issue: limits how disputes are handled and may waive court, jury trial, or class action rights.

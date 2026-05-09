@@ -77,6 +77,8 @@ The first analyzer is rule-based. This makes risk categories easier to explain a
 
 This approach avoids a fully black-box result and keeps the app useful even without a paid AI API.
 
+Technically, the engine is an NLP pipeline rather than a trained legal AI model. It normalizes text, classifies the document type with weighted signals, matches clause patterns, extracts source snippets, calculates confidence, scores the risk level, and returns plain-English explanations. The architecture leaves room for optional LLM summaries later while keeping rule-based detection as the explainable fallback.
+
 ### Plain-English Explanations
 
 Risk findings are written in everyday language. For example:
@@ -148,6 +150,7 @@ This project demonstrates:
 - REST API design
 - Frontend state and results presentation
 - Rule-based NLP workflow
+- Explainable model documentation and walkthrough notebook
 - Document upload and extraction
 - OCR-ready backend design
 - Local persistence with SQLite

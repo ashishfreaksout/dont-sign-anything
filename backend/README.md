@@ -32,6 +32,23 @@ The API runs at `http://localhost:8000`.
 
 Saved analysis history is stored in local SQLite under `backend/app_data/`.
 
+## Analysis Engine
+
+The backend uses an explainable rule-based NLP engine, not a trained model or paid LLM by default.
+
+Core analysis services:
+
+- `app/services/document_classifier.py` classifies document type with weighted keyword signals.
+- `app/services/risk_analyzer.py` detects risky clauses with regex rules and returns confidence, snippets, explanations, and questions.
+- `app/services/scoring.py` calculates the 0-100 risk score from severity, confidence, document type, and user preferences.
+- `app/services/summarizer.py` builds plain-English summaries, obligations, deadlines, parties, and next steps.
+
+See the root documentation for the full explanation:
+
+- `docs/ai_nlp_engine.md`
+- `docs/model_card.md`
+- `notebooks/rule_based_nlp_walkthrough.ipynb`
+
 ## OCR Setup
 
 Image scan uploads use Tesseract OCR when the local engine is installed:

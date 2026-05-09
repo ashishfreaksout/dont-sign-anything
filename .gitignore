@@ -16,6 +16,7 @@ dist/
 # Local test artifacts
 backend/app_data/
 data/test_pdfs/
+notebooks/.ipynb_checkpoints/
 
 # OS
 .DS_Store

@@ -9,6 +9,7 @@ frontend/        React + Vite web app
 backend/         FastAPI REST API and analysis services
 mobile/          Expo React Native app
 docs/            Product, roadmap, policy, and technical documentation
+notebooks/       Portfolio walkthroughs for the analysis engine
 ```
 
 The web and mobile clients both call the FastAPI backend. The backend owns document extraction, OCR, classification, analysis, scoring, summarization, and saved report storage.
@@ -144,6 +145,28 @@ Creates short plain-English summaries without requiring an external AI service.
 ### `storage.py`
 
 Stores users, sessions, preferences, and saved analysis reports in local SQLite.
+
+## AI/NLP Engine
+
+The current analyzer is an explainable rule-based NLP system. It is not a trained machine-learning model or a paid LLM integration.
+
+The pipeline uses:
+
+- Text normalization
+- Weighted document-type keyword signals
+- Regex-based clause rules
+- Sentence/snippet extraction
+- Confidence heuristics
+- Score weighting
+- Template-based plain-English explanations
+
+This design keeps the product inspectable. If the app flags an arbitration clause, the user can see the trigger phrase and matched sentence that caused the finding.
+
+Detailed documentation:
+
+- [AI/NLP engine](ai_nlp_engine.md)
+- [Model card](model_card.md)
+- [Analyzer notebook](../notebooks/rule_based_nlp_walkthrough.ipynb)
 
 ## Data Privacy Boundaries
 
